@@ -150,7 +150,7 @@
         return Math.pow(2, Math.floor(Math.log(approx) / Math.log(2)));
     }
 
-    this.create_dice_materials = function(face_labels, size, margin) {
+    this.create_dice_materials = function(face_labels, size, margin, col) {
         function create_text_texture(text, color, back_color) {
             if (text == undefined) return null;
             var canvas = document.createElement("canvas");
@@ -174,7 +174,7 @@
         var materials = [];
         for (var i = 0; i < face_labels.length; ++i)
             materials.push(new THREE.MeshPhongMaterial($t.copyto(this.material_options,
-                        { map: create_text_texture(face_labels[i], this.label_color, this.dice_color) })));
+                        { map: create_text_texture(face_labels[i], this.label_color, col) })));
         return materials;
     }
 
@@ -296,31 +296,36 @@
 
     this.scale = 50;
 
+    let col1 = '#f66f05';
+    let col2 = '#06790a';
+    let col3 = '#910833';
+    let col4 = '#086691';
+
     this.create_d1 = function() {
         if (!this.d2_geometry) this.d2_geometry = this.create_d2_geometry(this.scale * 1.9);
         /*if (!this.dice_material)*/ this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels1, this.scale / 2, 1.0));
+                this.create_dice_materials(this.standart_d20_dice_face_labels1, this.scale / 2, 1.0, col1));
         return new THREE.Mesh(this.d2_geometry, this.dice_material);
     }
 
     this.create_d2 = function() {
         if (!this.d2_geometry) this.d2_geometry = this.create_d2_geometry(this.scale * 0.9);
         /*if (!this.dice_material)*/ this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels2, this.scale / 2, 1.0));
+                this.create_dice_materials(this.standart_d20_dice_face_labels2, this.scale / 2, 1.0, col2));
         return new THREE.Mesh(this.d2_geometry, this.dice_material);
     }
 
     this.create_d3 = function() {
         if (!this.d2_geometry) this.d2_geometry = this.create_d2_geometry(this.scale * 0.9);
         /*if (!this.dice_material)*/ this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels3, this.scale / 2, 1.0));
+                this.create_dice_materials(this.standart_d20_dice_face_labels3, this.scale / 2, 1.0, col3));
         return new THREE.Mesh(this.d2_geometry, this.dice_material);
     }
 
     this.create_d4 = function() {
         if (!this.d2_geometry) this.d2_geometry = this.create_d2_geometry(this.scale * 0.9);
         /*if (!this.dice_material)*/ this.dice_material = new THREE.MeshFaceMaterial(
-                this.create_dice_materials(this.standart_d20_dice_face_labels4, this.scale / 2, 1.0));
+                this.create_dice_materials(this.standart_d20_dice_face_labels4, this.scale / 2, 1.0, col4));
         return new THREE.Mesh(this.d2_geometry, this.dice_material);
     }
 
